@@ -1,13 +1,16 @@
 import React from "react";
 import ProgressRing from "./progressRing";
 import { FaUserCircle, FaCalendarAlt } from "react-icons/fa";
+import Card from "@/components/card";
+import FoodItemsInit from "../../../FoodItems.json"
+import ramseyPhoto from "@/assets/Ramsey-Photo.png"
+import Image from "next/image";
 
 const Project = () => {
+
   return (
-    <div
-      className="min-h-screen bg-cover bg-center relative text-white"
-      style={{ backgroundImage: `url('/gym-background.jpg')` }}
-    >
+    <div className="relative min-h-screen text-white overflow-y-auto">
+      <Image src={ramseyPhoto} alt="Ramsey BG" fill priority className="object-cover w-full h-full z-[-1]"/>
       <div className="flex items-center justify-between bg-white text-black px-6 py-3 border-b-4 border-red-600">
         <div className="flex gap-4">
           <ProgressRing progress={70} color="red" />
@@ -25,17 +28,26 @@ const Project = () => {
 
         <FaUserCircle className="text-3x1" />
       </div>
-    </div>
+      <div className="p-6">
+        <h1 className="text-3xl font-bold mb-4">Plan</h1>
+        <button className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-white hover:text-red-500 transition duration-300">
+          <a href="/form">Add new Food item</a>
+        </button>
 
-    /*
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4">Plan</h1>
-      <p className="text-lg mb-6">This is the project page.</p>
-      <button className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-white hover:text-red-500 transition duration-300">
-        <a href="/form">Add new Food item</a>
-      </button>
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-black">
+          {FoodItemsInit.map((item, index) => (
+            <Card
+              key = {index}
+              name = {item.name}
+              calories = {item.calories}
+              protein = {item.protein}
+              carbs = {item.carbs}
+              fats = {item.fats}
+            />
+          ))}
+        </div>
+      </div>
     </div>
-     */
   );
 };
 
