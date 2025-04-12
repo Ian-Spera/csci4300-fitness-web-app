@@ -1,6 +1,6 @@
 import React from "react";
 
-var currentDay = "Saturday, April 12, 2025";
+var currentDay = new Date().toLocaleDateString();
 
 type FormHandler = {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
