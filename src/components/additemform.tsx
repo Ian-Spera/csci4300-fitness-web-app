@@ -7,10 +7,10 @@ type FormHandler = {
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
     formData: {
         name: string, 
-        calories: Number, 
-        carbs: Number, 
-        fats: Number, 
-        protein: Number
+        calories: number, 
+        carbs: number, 
+        fats: number, 
+        protein: number
     }
 }
 
@@ -43,6 +43,7 @@ export default function AddItemForm({handleChange, handleSubmit, formData} : For
                                 required 
                                 placeholder="Name of food"
                                 onChange={handleChange}
+                                value={formData.name}
                                 className="flex text-center rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
                         </div>
                         <div className="flex basis-1/6 pe-5">
@@ -53,6 +54,7 @@ export default function AddItemForm({handleChange, handleSubmit, formData} : For
                                 required 
                                 defaultValue={0}
                                 onChange={handleChange}
+                                value={formData.calories}
                                 className="flex text-center rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
                         </div>
                         <div className="flex basis-1/6 pe-5">
@@ -63,6 +65,7 @@ export default function AddItemForm({handleChange, handleSubmit, formData} : For
                                 required
                                 defaultValue={0}
                                 onChange={handleChange}
+                                value={formData.carbs}
                                 className="flex text-center rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
                         </div>
                         <div className="flex basis-1/6 pe-5">
@@ -73,6 +76,7 @@ export default function AddItemForm({handleChange, handleSubmit, formData} : For
                                 required 
                                 defaultValue={0}
                                 onChange={handleChange}
+                                value={formData.fats}
                                 className="flex text-center rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
                         </div>
                         <div className="flex basis-1/6">
@@ -83,6 +87,7 @@ export default function AddItemForm({handleChange, handleSubmit, formData} : For
                                 required 
                                 defaultValue={0}
                                 onChange={handleChange}
+                                value={formData.protein}
                                 className="flex text-center rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
                         </div>
                     </div>
