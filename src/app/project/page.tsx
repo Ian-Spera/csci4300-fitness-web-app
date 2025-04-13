@@ -11,22 +11,21 @@ const Project = () => {
   return (
     <div className="relative min-h-screen text-white overflow-y-auto">
       <Image src={ramseyPhoto} alt="Ramsey BG" fill priority className="object-cover w-full h-full z-[-1]"/>
-      <div className="flex items-center justify-between bg-white text-black px-6 py-3 border-b-4 border-red-600">
-        <div className="flex gap-4">
-          <ProgressRing progress={70} color="red" />
-          <ProgressRing progress={90} color="blue" />
-          <ProgressRing progress={40} color="green" />
+      <div className="flex items-center justify-between bg-white text-black px-8 py-4 border-b-4 border-red-600">
+        <div className="flex items-center gap-4">
+          <ProgressRing progress={70} color="red" label="Calories" />
+          <ProgressRing progress={90} color="blue" label="Protein" />
+          <ProgressRing progress={40} color="green" label="Carbsa"/>
+          <FaCalendarAlt className="text-4xl ml-20" />
         </div>
 
-        <FaCalendarAlt className="text-2x1" />
-
-        <div className="text-center font-bold text-xl">
+        <div className="text-center font-bold text-2xl">
           <div className="bg-white border-4 border-black px-4 py-1 rounded-full">
             Dawg<span className="text-red-600">Diet</span>
           </div>
         </div>
 
-        <FaUserCircle className="text-3x1" />
+        <FaUserCircle className="text-5xl" />
       </div>
       <div className="p-6">
         <h1 className="text-3xl font-bold mb-4">Plan</h1>
@@ -43,6 +42,7 @@ const Project = () => {
               protein = {item.protein}
               carbs = {item.carbs}
               fats = {item.fats}
+              imageUrl = {item.imageUrl}
             />
           ))}
         </div>

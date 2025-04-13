@@ -4,27 +4,31 @@
         "calories": 700,
         "protein": 40,
         "carbs": 45,
-        "fats": 9 
+        "fats": 9,
+        "imageUrl": "https://www.servingdumplings.com/wp-content/uploads/2024/02/one-pot-creamy-chicken-and-rice-tn-0ab0d9f1.jpg"
     },
     {
-        "name": "Chicken and Rice",
+        "name": "Protein Shake",
         "calories": 700,
         "protein": 40,
         "carbs": 45,
-        "fats": 9 
+        "fats": 9, 
+        "imageUrl": "https://dymatize.imgix.net/a/blog/ChocPeppermintProteinShake_1856x1236.jpg?ar=928%3A618&auto=format%2Ccompress&fit=crop&ixlib=php-3.1.0&s=16528de05896185ee56d4574ff411d60"
     },
     {
-        "name": "Chicken and Rice",
+        "name": "Oatmeal",
         "calories": 700,
         "protein": 40,
         "carbs": 45,
-        "fats": 9 
+        "fats": 9,
+        "imageUrl": "https://diethood.com/wp-content/uploads/2019/12/How-To-Make-Oatmeal-4-500x500.jpg"
     },
     {
-        "name": "Chicken and Rice",
+        "name": "Steak",
         "calories": 700,
         "protein": 40,
         "carbs": 45,
-        "fats": 9 
+        "fats": 9,
+        "imageUrl": "https://www.inspiredtaste.net/wp-content/uploads/2023/06/Grilled-Steak-1-1200.jpg"
     }
 ]
