@@ -15,7 +15,7 @@ const Project = () => {
         <div className="flex items-center gap-4">
           <ProgressRing progress={70} color="red" label="Calories" />
           <ProgressRing progress={90} color="blue" label="Protein" />
-          <ProgressRing progress={40} color="green" label="Carbsa"/>
+          <ProgressRing progress={40} color="green" label="Carbs"/>
           <FaCalendarAlt className="text-4xl ml-20" />
         </div>
 
