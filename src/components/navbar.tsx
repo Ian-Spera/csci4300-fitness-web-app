@@ -50,7 +50,13 @@ const Navbar = () => {
             <Link className='flex flex-shrink-0 items-center' href='/'>
 
               <span className='hidden md:block text-white text-2xl font-bold ml-2 hover:text-black transition duration-300'>
-                Dawg Diet
+                <div className="w-24 h-19 rounded-md overflow-hidden shadow-lg">
+                  <img
+                    src="/assets/DawgDietLogo.png"
+                    alt="Dawg Diet Logo"
+                    className="w-full h-full object-cover rounded-3xl border-3 border-black"
+                  />
+                </div>
               </span>
             </Link>
             {/* <!-- Desktop Menu Hidden below md screens --> */}
