@@ -12,20 +12,14 @@ const Project = () => {
     <div className="relative min-h-screen text-white overflow-y-auto">
       <Image src={ramseyPhoto} alt="Ramsey BG" fill priority className="object-cover w-full h-full z-[-1]"/>
       <div className="flex items-center justify-between bg-white text-black px-8 py-4 border-b-4 border-red-600">
-        <div className="flex items-center gap-4">
-          <ProgressRing progress={70} color="red" label="Calories" />
-          <ProgressRing progress={90} color="blue" label="Protein" />
-          <ProgressRing progress={40} color="green" label="Carbs"/>
-          <FaCalendarAlt className="text-4xl ml-20" />
-        </div>
-
-        <div className="text-center font-bold text-2xl">
-          <div className="bg-white border-4 border-black px-4 py-1 rounded-full">
-            Dawg<span className="text-red-600">Diet</span>
+        <div className="border-4 border-gray-700 rounded-xl p-3 bg-gray-100 shadow-sm w-full">
+          <div className="flex justify-between items-center w-full space-x-4">
+              <ProgressRing progress={70} color="red" label="Calories" />
+              <ProgressRing progress={90} color="blue" label="Protein" />
+              <ProgressRing progress={40} color="green" label="Carbs" />
+              <ProgressRing progress={50} color="orange" label="Fats" />
           </div>
         </div>
-
-        <FaUserCircle className="text-5xl" />
       </div>
       <div className="p-6">
         <h1 className="text-3xl font-bold mb-4">Plan</h1>

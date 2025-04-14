@@ -7,8 +7,8 @@ interface ProgressRingsProps {
 }
 
 const ProgressRing: React.FC<ProgressRingsProps> = ({progress, color, label}) => {
-    const radius = 40;
-    const stroke = 6;
+    const radius = 50;
+    const stroke = 12;
     const normalizedRadius = radius - stroke * 0.5;
     const circumference = normalizedRadius * 2 * Math.PI;
     const strokeDashoffset = circumference - (progress / 100) * circumference;
@@ -36,7 +36,7 @@ const ProgressRing: React.FC<ProgressRingsProps> = ({progress, color, label}) =>
                     cy={radius}
                 />
             </svg>
-            <div className="text-[10px] text-black text-center leading-tight">
+            <div className="text-[15px] text-black text-center leading-tight">
                 <div>{label}</div>
                 <div>{progress}%</div>
             </div>
