@@ -61,11 +61,11 @@ const Navbar = () => {
             </Link>
             {/* <!-- Desktop Menu Hidden below md screens --> */}
             <div className='hidden md:ml-6 md:block'>
-              <div className='flex space-x-2'>
+              <div className='flex space-x-4'>
               
               <Link
                   href='/project'
-                  className='text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
+                  className='text-white hover:bg-gray-900 hover:text-white rounded-lg px-3 py-2 mt-4 text-lg font-medium'
                 >
                   Plan
                 </Link>
