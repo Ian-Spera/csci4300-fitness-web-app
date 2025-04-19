@@ -52,7 +52,7 @@ export default function AddItemForm({handleChange, handleSubmit, formData} : For
                                 name="calories" 
                                 type="number" 
                                 required 
-                                defaultValue={0}
+                                //defaultValue={0}
                                 onChange={handleChange}
                                 value={formData.calories}
                                 className="flex text-center rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
@@ -63,7 +63,7 @@ export default function AddItemForm({handleChange, handleSubmit, formData} : For
                                 name="carbs" 
                                 type="number" 
                                 required
-                                defaultValue={0}
+                               // defaultValue={0}
                                 onChange={handleChange}
                                 value={formData.carbs}
                                 className="flex text-center rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
@@ -74,7 +74,7 @@ export default function AddItemForm({handleChange, handleSubmit, formData} : For
                                 name="fats" 
                                 type="number" 
                                 required 
-                                defaultValue={0}
+                               // defaultValue={0}
                                 onChange={handleChange}
                                 value={formData.fats}
                                 className="flex text-center rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
@@ -85,7 +85,7 @@ export default function AddItemForm({handleChange, handleSubmit, formData} : For
                                 name="protein" 
                                 type="number" 
                                 required 
-                                defaultValue={0}
+                                //defaultValue={0}
                                 onChange={handleChange}
                                 value={formData.protein}
                                 className="flex text-center rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>

@@ -1,18 +1,34 @@
 'use client';
 // This is from my Nextjs resources, Navbar_basic
 import Image from 'next/image';
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-// import profileDefault from '@/assets/images/profile.png';
+import { useRouter } from 'next/navigation'; // Import useRouter
 
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter(); // Initialize useRouter
 
-
-  const [isLoggedIn,setIsLoggedIn ] = useState(false);
+  // Load login state from local Storage
+  useEffect(() => {
+    const storedLoginState = localStorage.getItem('isLoggedIn');
+    if (storedLoginState === 'true') {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleLogin = () => {
-    setIsLoggedIn(prev => !prev);
-  }
+    if (!isLoggedIn) {
+      setIsLoggedIn(true);
+      localStorage.setItem('isLoggedIn', 'true'); // Save login state to localStorage
+      router.push('/project'); // Navigate to the project page
+    } else {
+      setIsLoggedIn(false);
+      localStorage.setItem('isLoggedIn', 'false'); // Save logout state to localStorage
+      router.push('/'); // Navigate back to the main page
+    }
+  };
+
   return (
     <nav className='bg-red-700 border-b-1 border-white backdrop-blur-'>
       <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
@@ -48,52 +64,40 @@ const Navbar = () => {
           <div className='flex flex-1 items-center justify-center md:items-stretch md:justify-start'>
             {/* <!-- Logo --> */}
             <Link className='flex flex-shrink-0 items-center' href='/'>
-
               <span className='hidden md:block text-white text-2xl font-bold ml-2 hover:text-black transition duration-300'>
-                Dawg Diet
+                <div className='w-24 h-19 rounded-md overflow-hidden shadow-lg'>
+                  <img
+                    src='/assets/DawgDietLogo.png'
+                    alt='Dawg Diet Logo'
+                    className='w-full h-full object-cover rounded-3xl border-3 border-black'
+                  />
+                </div>
               </span>
             </Link>
             {/* <!-- Desktop Menu Hidden below md screens --> */}
             <div className='hidden md:ml-6 md:block'>
-              <div className='flex space-x-2'>
-              
-              <Link
+              <div className='flex space-x-4'>
+                <Link
                   href='/project'
-                  className='text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
+                  className='text-white hover:bg-gray-900 hover:text-white rounded-lg px-3 py-2 mt-4 text-lg font-medium'
                 >
                   Plan
                 </Link>
+              </div>
             </div>
           </div>
+
+          {/* <!-- Right Side Menu --> */}
+          <div className='hidden md:block md:ml-6'>
+            <div className='flex items-center'>
+              <button
+                onClick={handleLogin}
+                className='flex items-center text-white bg-gray-400 hover:bg-black hover:text-white rounded-md px-3 py-2'
+              >
+                <span>{isLoggedIn ? 'Sign Out' : 'Login | Register'}</span>
+              </button>
             </div>
-
-          {/* <!-- Right Side Menu (Logged Out) --> */}
-         { 
-          !isLoggedIn && (
-                <div className='hidden md:block md:ml-6'>
-                  <div className='flex items-center'>
-                    <Link 
-                      href='/project' 
-                      className='flex items-center text-white bg-gray-400 hover:bg-black hover:text-white rounded-md px-3 py-2'
-                    >
-                      <span>Login | Register</span>
-                    </Link>
-                  </div>
-                </div>
-          )
-        }
-
-             {/* <!-- Right Side Menu (Logged In) --> */}
-        { isLoggedIn && (
-                <div className='hidden md:block md:ml-6'>
-                  <div className='flex items-center'>
-                    <button onClick = {handleLogin} className='flex items-center text-white bg-gray-400 hover:bg-gray-500 hover:text-white rounded-md px-3 py-2'>
-                      <span>Logout</span>
-                    </button>
-                  </div>
-                </div>
-        )}
-
+          </div>
         </div>
       </div>
 
@@ -106,10 +110,13 @@ const Navbar = () => {
           >
             About
           </a>
-        
-          <button className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-4'>
+
+          <button
+            onClick={handleLogin}
+            className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-4'
+          >
             <i className='fa-brands fa-google mr-2'></i>
-            <span>Login or Register</span>
+            <span>{isLoggedIn ? 'Sign Out' : 'Login or Register'}</span>
           </button>
         </div>
       </div>
