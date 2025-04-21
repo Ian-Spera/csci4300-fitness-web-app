@@ -1,12 +1,34 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import ProgressRing from "./progressRing";
-import { FaUserCircle, FaCalendarAlt } from "react-icons/fa";
 import Card from "@/components/card";
-import FoodItemsInit from "../../../FoodItems.json"
 import ramseyPhoto from "@/assets/Ramsey-Photo.png"
 import Image from "next/image";
+import AddItemDropDown from "@/components/additemdropdown";
+
 
 const Project = () => {
+  const [items, setItems] = useState([{}]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch("/api/items");
+        if (!response.ok)
+          throw new Error("Response was not ok.");
+
+        const data = await response.json();
+
+        setItems(data.items);
+      } catch (error) {
+        console.error("Error getting item list.", error);
+      } // try/catch
+      setLoading(false);
+    } // fetchItems
+
+    fetchItems();
+  }, []);
 
   return (
     <div className="relative min-h-screen text-white overflow-y-auto">
@@ -23,24 +45,24 @@ const Project = () => {
       </div>
       <div className="p-6">
         <h1 className="text-3xl font-bold mb-4">Plan</h1>
-        <button className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-white hover:text-red-500 transition duration-300">
-          <a href="/form">Add new Food item</a>
-        </button>
-
+        <AddItemDropDown></AddItemDropDown>
+        {loading ? <h1 className="m-10 p-6 bg-white text-black text-center rounded-full uppercase"><b>Loading...</b></h1> :
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-black">
-          {FoodItemsInit.map((item, index) => (
-            <Card
-              key = {index}
-              name = {item.name}
-              calories = {item.calories}
-              protein = {item.protein}
-              carbs = {item.carbs}
-              fats = {item.fats}
-              imageUrl = {item.imageUrl}
+          {items.map((item, index) => (
+            // If item.* is red, ignore, it works fine.
+            <Card key={index} 
+              _id={item._id}
+              name={item.name}
+              calories={item.calories} 
+              protein={item.protein}
+              carbs={item.carbs}
+              fats={item.fats}
+              imageUrl={item.imageUrl}
             />
           ))}
         </div>
-      </div>
+        }
+      </div> 
     </div>
   );
 };
