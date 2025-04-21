@@ -1,6 +1,10 @@
 import React, {useState} from "react";
 import Image from "next/image";
 import ramseyPhoto from "@/assets/Ramsey-Photo.png";
+import { useRouter } from 'next/navigation';
+import { calculateMacros } from '../utils/calculateMacros'
+
+
 
 interface UserProfileData {
     weight: string;
@@ -8,6 +12,7 @@ interface UserProfileData {
     gender: string;
     activityLevel: string;
     age: string;
+    goal: string;
 }
 
 type UserProfileFormProps = {
@@ -15,12 +20,15 @@ type UserProfileFormProps = {
 }
 
 export default function UserProfileForm({onSubmit}: UserProfileFormProps) {
+    const router = useRouter();
+
     const [formData, setFormData] = useState<UserProfileData>({
         weight: '',
         height: '',
         gender: '',
         activityLevel: '',
         age: '',
+        goal: '',
     });
 
     const handleChange = ( e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -34,13 +42,26 @@ export default function UserProfileForm({onSubmit}: UserProfileFormProps) {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSubmit(formData);
+
+        const result = calculateMacros({
+            weightLbs: formData.weight,
+            heightCm: formData.height,
+            age: formData.age,
+            gender: formData.gender,
+            activityLevel: formData.activityLevel,
+            goal: formData.goal,
+        });
+
         setFormData({
             weight: '',
             height: '',
             gender: '',
             activityLevel: '',
             age: '',
+            goal: '',
         });
+
+        router.push('/project');
     };
 
     return (
@@ -52,7 +73,7 @@ export default function UserProfileForm({onSubmit}: UserProfileFormProps) {
             </label>
 
             <label className="block mb-2">
-                Height (inches)
+                Height (cm)
                 <input type="text" name="height" value={formData.height} onChange={handleChange} className="w-full border rounded p-2 mt-1"/>
             </label>
             
@@ -80,6 +101,15 @@ export default function UserProfileForm({onSubmit}: UserProfileFormProps) {
             <label className="block mb-2">
                 Age
                 <input type="text" name="age" value={formData.age} onChange={handleChange} className="w-full border rounded p-2 mt-1"/>
+            </label>
+
+            <label className="block mb-2">
+                Goal
+                <select name="activityLevel" value={formData.activityLevel} onChange={handleChange} className="w-full border rounded p-2 mt-1">
+                <option value="">Select goal</option>
+                    <option value="bulk">Bulk</option>
+                    <option value="cut">Cut</option>
+                </select>
             </label>
 
             <button type="submit" className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300">
