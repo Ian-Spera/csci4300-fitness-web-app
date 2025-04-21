@@ -42,7 +42,7 @@ const LoginForm = () => {
               Email Address
             </label>
             <input
-              className="border border-gray-400 rounded px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="border border-gray-400 rounded px-3 py-2 text-black bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
               type="email"
               name="email"
               id="email"
@@ -56,7 +56,7 @@ const LoginForm = () => {
               Password
             </label>
             <input
-              className="border border-gray-400 rounded px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="border border-gray-400 rounded px-3 py-2 text-black bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
               type="password"
               name="password"
               id="password"
