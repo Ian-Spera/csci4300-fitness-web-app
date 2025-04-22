@@ -2,18 +2,38 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 
 // Mongoose provides properties such as the _id in Document, we extend this
 interface IItem extends Document {
-  food_item: string;
-  amount: number;
+  userID: string;
+  name: string;
+  calories: number;
+  carbs: number;
+  fats: number;
+  protein: number;
 }
 
 const itemSchema = new Schema<IItem>({
-  amount: {
-    type: Number,
-    required:true
-  },
-  food_item: {
+  userID: {
     type: String,
-    required: true,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  calories: {
+    type: Number,
+    required: true
+  },
+  carbs: {
+    type: Number,
+    required: true
+  },
+  fats: {
+    type: Number,
+    required: true
+  },
+  protein: {
+    type: Number,
+    required: true
   }
 });
 

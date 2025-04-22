@@ -1,15 +1,15 @@
-import React from "react";
+import LoginForm from '../../components/LoginForm';
 
-const login = () => {
+import Link from 'next/link'
+
+const LoginPage = () => {
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4">Login</h1>
-      <p className="text-lg mb-6">Login Here</p>
-      <button></button>
+    <div className="flex flex-col justify-center items-center bg-black">
+       <LoginForm /> 
+      
     </div>
-  );
+    
+  )
 }
 
-export default login;
-  
-  
+export default LoginPage
