@@ -5,16 +5,25 @@ import Card from "@/components/card";
 import ramseyPhoto from "@/assets/Ramsey-Photo.png"
 import Image from "next/image";
 import AddItemDropDown from "@/components/additemdropdown";
-
+import { getSession } from "next-auth/react";
 
 const Project = () => {
   const [items, setItems] = useState([{}]);
   const [loading, setLoading] = useState(true);
 
+  const [value, setValue] = useState(true);
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await fetch("/api/items");
+        const session = await getSession();
+
+        const user = await fetch(`/api/users/${session?.user?.email}`);
+        const user_data = await user.json();
+
+        const userID = user_data.user._id.toString();
+
+        const response = await fetch(`/api/items/byUser/${userID}`);
         if (!response.ok)
           throw new Error("Response was not ok.");
 
@@ -45,21 +54,9 @@ const Project = () => {
       </div>
       <div className="p-6">
         <h1 className="text-3xl font-bold mb-4">Plan</h1>
-        <AddItemDropDown></AddItemDropDown>
         {loading ? <h1 className="m-10 p-6 bg-white text-black text-center rounded-full uppercase"><b>Loading...</b></h1> :
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-black">
-          {items.map((item, index) => (
-            // If item.* is red, ignore, it works fine.
-            <Card key={index} 
-              _id={item._id}
-              name={item.name}
-              calories={item.calories} 
-              protein={item.protein}
-              carbs={item.carbs}
-              fats={item.fats}
-              imageUrl={item.imageUrl}
-            />
-          ))}
+        <div>
+          <AddItemDropDown {...{items, setItems}}/>
         </div>
         }
       </div> 

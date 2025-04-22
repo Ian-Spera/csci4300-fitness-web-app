@@ -1,6 +1,7 @@
 import Navbar from "../components/navbar";
 import { auth } from "../auth";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 
 
 export default async function RootLayout({

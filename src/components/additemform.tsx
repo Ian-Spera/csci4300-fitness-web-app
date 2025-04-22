@@ -5,10 +5,7 @@ type FormHandler = {
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
     formData: {
         name: string, 
-        calories: number, 
-        carbs: number, 
-        fats: number, 
-        protein: number
+        servingsize: number
     },
     active: boolean
 }
@@ -31,51 +28,19 @@ export default function AddItemForm({handleChange, handleSubmit, formData, activ
                                 placeholder="Name of food"
                                 onChange={handleChange}
                                 value={formData.name}
-                                className="flex text-center text-black rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
+                                className="flex w-100 text-center text-black rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
                         </div>
                         <div className="flex basis-1/6 pe-5">
-                            <label htmlFor="calories" className="rounded-l-lg bg-red-500 p-1 shadow-[2px_2px_5px_rgba(0,0,0,0.25)]">Calories</label>
+                            <label htmlFor="servingsize" className="w-25 rounded-l-lg bg-red-500 p-1 shadow-[2px_2px_5px_rgba(0,0,0,0.25)]">Serving Size</label>
                             <input 
-                                name="calories" 
+                                name="servingsize" 
                                 type="number" 
                                 required 
                                 //defaultValue={0}
                                 onChange={handleChange}
-                                value={formData.calories}
-                                className="flex text-center text-black rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
-                        </div>
-                        <div className="flex basis-1/6 pe-5">
-                            <label htmlFor="carbs" className="rounded-l-lg bg-red-500 p-1 shadow-[2px_2px_5px_rgba(0,0,0,0.25)]">Carbs</label>
-                            <input 
-                                name="carbs" 
-                                type="number" 
-                                required
-                               // defaultValue={0}
-                                onChange={handleChange}
-                                value={formData.carbs}
-                                className="flex text-center text-black rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
-                        </div>
-                        <div className="flex basis-1/6 pe-5">
-                            <label htmlFor="fats" className="rounded-l-lg bg-red-500 p-1 shadow-[2px_2px_5px_rgba(0,0,0,0.25)]">Fats</label>
-                            <input 
-                                name="fats" 
-                                type="number" 
-                                required 
-                               // defaultValue={0}
-                                onChange={handleChange}
-                                value={formData.fats}
-                                className="flex text-center text-black rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
-                        </div>
-                        <div className="flex basis-1/6">
-                            <label htmlFor="protein" className="rounded-l-lg bg-red-500 p-1 shadow-[2px_2px_5px_rgba(0,0,0,0.25)]">Protein</label>
-                            <input 
-                                name="protein" 
-                                type="number" 
-                                required 
-                                //defaultValue={0}
-                                onChange={handleChange}
-                                value={formData.protein}
-                                className="flex text-center text-black rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
+                                value={formData.servingsize}
+                                className="flex w-100 text-center text-black bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
+                            <label className="flex flex-col bg-red-500 p-1 shadow-[2px_2px_5px_rgba(0,0,0,0.25)] text-white rounded-r-lg">(grams)</label>
                         </div>
                     </div>
                     <div className="flex flex-row flex-nowrap basis-9/10 justify-center pt-5">
