@@ -1,10 +1,14 @@
-import connectMongoDB from '../../mongodb';
+import connectMongoDB from '../config/mongodb';
 import React, { useEffect } from 'react';
 import foodBackground from "./assets/food_background.png";
 import Image from 'next/image';
+import { connect } from 'http2';
+import { SessionProvider } from 'next-auth/react';
 
 export default function Home() {
+  connectMongoDB();
   return (
+    <SessionProvider>
     <div
       className="min-h-screen bg-cover bg-center p-4"
       style={{
@@ -89,5 +93,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </SessionProvider>
   );
 }
