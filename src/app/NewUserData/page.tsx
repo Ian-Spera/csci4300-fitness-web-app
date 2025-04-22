@@ -1,28 +1,16 @@
+"use client"
+
 import React, {useState} from "react";
 import Image from "next/image";
 import ramseyPhoto from "@/assets/Ramsey-Photo.png";
 import { useRouter } from 'next/navigation';
 import { calculateMacros } from '../utils/calculateMacros'
+import { getSession } from "next-auth/react";
 
-
-
-interface UserProfileData {
-    weight: string;
-    height: string;
-    gender: string;
-    activityLevel: string;
-    age: string;
-    goal: string;
-}
-
-type UserProfileFormProps = {
-    onSubmit: (profile: UserProfileData) => void;
-}
-
-export default function UserProfileForm({onSubmit}: UserProfileFormProps) {
+export default function ProfilePage() {
     const router = useRouter();
 
-    const [formData, setFormData] = useState<UserProfileData>({
+    const [formData, setFormData] = useState({
         weight: '',
         height: '',
         gender: '',
@@ -39,29 +27,62 @@ export default function UserProfileForm({onSubmit}: UserProfileFormProps) {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        onSubmit(formData);
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();      
 
-        const result = calculateMacros({
-            weightLbs: formData.weight,
-            heightCm: formData.height,
-            age: formData.age,
-            gender: formData.gender,
-            activityLevel: formData.activityLevel,
-            goal: formData.goal,
-        });
+        try {
+            const session = await getSession();
+            console.log("Fetched session:", session);
+            if (!session) {
+                console.error("No session found!");
+            }
+        
+            const user = await fetch(`/api/users/${session?.user?.email}`);
+            const user_data = await user.json();
+            const userID = user_data.user._id.toString();
 
-        setFormData({
-            weight: '',
-            height: '',
-            gender: '',
-            activityLevel: '',
-            age: '',
-            goal: '',
-        });
+            const {calories, protein, fat, carbs} = calculateMacros({
+                weightLbs: formData.weight,
+                heightCm: formData.height,
+                age: formData.age,
+                gender: formData.gender,
+                activityLevel: formData.activityLevel,
+                goal: formData.goal,
+            });
 
-        router.push('/project');
+            const data = {
+                userID,
+                calories,
+                protein,
+                fat,
+                carbs,
+            }
+
+            const response = await fetch('/api/userMacros', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            
+            if (!response) {
+                throw new Error("Failed to save user macros.");
+            }
+
+            setFormData({
+                weight: '',
+                height: '',
+                gender: '',
+                activityLevel: '',
+                age: '',
+                goal: '',
+            });
+
+            router.push('/project');
+        } catch (error) {
+            console.error("Error saving user macros.", error);
+        }
     };
 
     return (
@@ -105,7 +126,7 @@ export default function UserProfileForm({onSubmit}: UserProfileFormProps) {
 
             <label className="block mb-2">
                 Goal
-                <select name="activityLevel" value={formData.activityLevel} onChange={handleChange} className="w-full border rounded p-2 mt-1">
+                <select name="goal" value={formData.goal} onChange={handleChange} className="w-full border rounded p-2 mt-1">
                 <option value="">Select goal</option>
                     <option value="bulk">Bulk</option>
                     <option value="cut">Cut</option>

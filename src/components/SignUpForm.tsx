@@ -34,7 +34,7 @@ const SignupForm = () => {
       });
 
       if (response.status === 201) {
-        router.push("/login");
+        router.push("NewUserData");
       } else {
         console.log(`Failed to register: ${response.statusText}`);
       }
