@@ -2,6 +2,7 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 
 // Mongoose provides properties such as the _id in Document, we extend this
 interface IItem extends Document {
+  userID: string;
   name: string;
   calories: number;
   carbs: number;
@@ -10,6 +11,10 @@ interface IItem extends Document {
 }
 
 const itemSchema = new Schema<IItem>({
+  userID: {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true

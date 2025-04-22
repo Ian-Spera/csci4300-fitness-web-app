@@ -3,6 +3,10 @@ import React, { ButtonHTMLAttributes } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
+type CardFunc = {
+  remove(card_id: string): (card_id: string) => void,
+}
+
 interface CardProps {
     _id: string;
     name: string;
@@ -11,20 +15,21 @@ interface CardProps {
     carbs: number;
     fats: number;
     imageUrl: string;
+    remove(card_id: string): void;
   }
   
-  const Card: React.FC<CardProps> = ({_id, name, calories, protein, carbs, fats, imageUrl}) => {
+  const Card: React.FC<CardProps> = ({_id, name, calories, protein, carbs, fats, imageUrl, remove}: CardProps) => {
     const removeItem = async () => {
-      /*try {
+      try {
         const response = await fetch(`/api/items/${_id}`, {
           method: "DELETE",
         });
         if (!response.ok)
           throw new Error("Response was not ok.");
-        
+        remove(_id);
       } catch (error) {
         console.error("Could not delete item: ", error);
-      }*/
+      }
     }
 
     return (

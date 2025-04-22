@@ -1,4 +1,4 @@
-import LoginForm from '../../components/LoginForm.tsx';
+import LoginForm from '../../components/LoginForm';
 
 import Link from 'next/link'
 
