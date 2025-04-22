@@ -4,6 +4,7 @@ import React from "react";
 import { useState } from "react";
 import { RiArrowDropDownLine, RiArrowDropRightLine, RiArrowGoForwardLine } from 'react-icons/ri';
 import Card from "./card";
+import getMacros from "@/app/utils/getMacrosAPI";
 
 type ItemHandler = {
     items: {}[],
@@ -31,13 +32,17 @@ export default function AddItemDropDown({items, setItems}: ItemHandler) {
             const user_data = await user.json();
             const id = user_data.user._id.toString();
 
+            const query = "" + formData.name.toLowerCase() + " " + formData.servingsize.toString() + " grams";
+            const macro = await getMacros(query);
+            const macroData = macro[0];
+
             const response = await fetch('/api/items', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 // Use API to fetch data for calories carbs fats and protein
-                body: JSON.stringify({userID: id, name: formData.name, calories: 0, carbs: 0, fats: 0, protein: 0}),
+                body: JSON.stringify({userID: id, name: formData.name, calories: macroData.calories, carbs: macroData.carbs, fats: macroData.fat, protein: macroData.protein}),
             });
             
             const items = await fetch(`/api/items/byUser/${id}`);

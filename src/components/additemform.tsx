@@ -28,10 +28,10 @@ export default function AddItemForm({handleChange, handleSubmit, formData, activ
                                 placeholder="Name of food"
                                 onChange={handleChange}
                                 value={formData.name}
-                                className="flex text-center text-black rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
+                                className="flex w-100 text-center text-black rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
                         </div>
                         <div className="flex basis-1/6 pe-5">
-                            <label htmlFor="servingsize" className="rounded-l-lg bg-red-500 p-1 shadow-[2px_2px_5px_rgba(0,0,0,0.25)]">Serving Size</label>
+                            <label htmlFor="servingsize" className="w-25 rounded-l-lg bg-red-500 p-1 shadow-[2px_2px_5px_rgba(0,0,0,0.25)]">Serving Size</label>
                             <input 
                                 name="servingsize" 
                                 type="number" 
@@ -39,8 +39,8 @@ export default function AddItemForm({handleChange, handleSubmit, formData, activ
                                 //defaultValue={0}
                                 onChange={handleChange}
                                 value={formData.servingsize}
-                                className="flex text-center text-black rounded-r-lg bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
-                                <label htmlFor="servingsize" className="">(grams)</label>
+                                className="flex w-100 text-center text-black bg-[#FFFFFF30] shadow-[2px_2px_5px_rgba(0,0,0,0.25)] inset-shadow-[2px_2px_5px_rgba(0,0,0,0.25)]"></input>
+                            <label className="flex flex-col bg-red-500 p-1 shadow-[2px_2px_5px_rgba(0,0,0,0.25)] text-white rounded-r-lg">(grams)</label>
                         </div>
                     </div>
                     <div className="flex flex-row flex-nowrap basis-9/10 justify-center pt-5">

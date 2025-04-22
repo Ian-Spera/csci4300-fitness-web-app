@@ -37,10 +37,10 @@ interface CardProps {
         <div className="p-4">
           <h2 className="text-x1 font-bold mb-2">{name}</h2>
             <ul>
-              <li><strong>Calories:</strong>{calories}</li>
-              <li><strong>Protein:</strong>{protein}</li>
-              <li><strong>Carbs:</strong>{carbs}</li>
-              <li><strong>Fats:</strong>{fats}</li>
+              <li><strong>Calories: </strong>{calories} g</li>
+              <li><strong>Protein: </strong>{protein} g</li>
+              <li><strong>Carbs: </strong>{carbs} g</li>
+              <li><strong>Fats: </strong>{fats} g</li>
             </ul>
         </div>
         <div className="ml-4">
