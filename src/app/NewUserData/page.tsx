@@ -11,11 +11,11 @@ export default function ProfilePage() {
     const router = useRouter();
 
     const [formData, setFormData] = useState({
-        weight: '',
-        height: '',
+        weight: 0,
+        height: 0,
         gender: '',
         activityLevel: '',
-        age: '',
+        age: 0,
         goal: '',
     });
 
@@ -32,7 +32,6 @@ export default function ProfilePage() {
 
         try {
             const session = await getSession();
-            console.log("Fetched session:", session);
             if (!session) {
                 console.error("No session found!");
             }
@@ -41,6 +40,7 @@ export default function ProfilePage() {
             const user_data = await user.json();
             const userID = user_data.user._id.toString();
 
+            console.log(userID);
             const {calories, protein, fat, carbs} = calculateMacros({
                 weightLbs: formData.weight,
                 heightCm: formData.height,
@@ -59,7 +59,7 @@ export default function ProfilePage() {
             }
 
             const response = await fetch('/api/userMacros', {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -71,11 +71,11 @@ export default function ProfilePage() {
             }
 
             setFormData({
-                weight: '',
-                height: '',
+                weight: 0,
+                height: 0,
                 gender: '',
                 activityLevel: '',
-                age: '',
+                age: 0,
                 goal: '',
             });
 
@@ -90,17 +90,17 @@ export default function ProfilePage() {
             <h2 className="text-2x1 font-bold mb-4">Tell us about yourself</h2>
             <label className="block mb-2">
                 Weight (lbs)
-                <input type="text" name="weight" value={formData.weight} onChange={handleChange} className="w-full border rounded p-2 mt-1"/>
+                <input type="number" required name="weight" value={formData.weight} onChange={handleChange} className="w-full border rounded p-2 mt-1"/>
             </label>
 
             <label className="block mb-2">
                 Height (cm)
-                <input type="text" name="height" value={formData.height} onChange={handleChange} className="w-full border rounded p-2 mt-1"/>
+                <input type="number" required name="height" value={formData.height} onChange={handleChange} className="w-full border rounded p-2 mt-1"/>
             </label>
             
             <label className="block mb-2">
                 Gender
-                <select name="gender" value={formData.gender} onChange={handleChange} className="w-full border rounded p-2 mt-1">
+                <select name="gender" required value={formData.gender} onChange={handleChange} className="w-full border rounded p-2 mt-1">
                     <option value="">Select gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -109,24 +109,24 @@ export default function ProfilePage() {
 
             <label className="block mb-2">
                 Activity Level
-                <select name="activityLevel" value={formData.activityLevel} onChange={handleChange} className="w-full border rounded p-2 mt-1">
+                <select name="activityLevel" required value={formData.activityLevel} onChange={handleChange} className="w-full border rounded p-2 mt-1">
                 <option value="">Select level</option>
                     <option value="sedentary">Sedentary</option>
                     <option value="light">Light</option>
                     <option value="moderate">Moderate</option>
                     <option value="active">Active</option>
-                    <option value="very active">Very Active</option>
+                    <option value="veryActive">Very Active</option>
                 </select>
             </label>
 
             <label className="block mb-2">
                 Age
-                <input type="text" name="age" value={formData.age} onChange={handleChange} className="w-full border rounded p-2 mt-1"/>
+                <input type="number" required name="age" value={formData.age} onChange={handleChange} className="w-full border rounded p-2 mt-1"/>
             </label>
 
             <label className="block mb-2">
                 Goal
-                <select name="goal" value={formData.goal} onChange={handleChange} className="w-full border rounded p-2 mt-1">
+                <select name="goal" required value={formData.goal} onChange={handleChange} className="w-full border rounded p-2 mt-1">
                 <option value="">Select goal</option>
                     <option value="bulk">Bulk</option>
                     <option value="cut">Cut</option>

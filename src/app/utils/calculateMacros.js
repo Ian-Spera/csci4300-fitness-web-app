@@ -15,7 +15,7 @@ export function calculateMacros({weightLbs, heightCm, age, gender, activityLevel
 
     const tdee = bmr * activityMultipliers[activityLevel];
 
-    let adjustedCalories = tdee;
+    var adjustedCalories = tdee;
     if (goal === 'cut') adjustedCalories -= 500;
     if (goal === 'bulk') adjustedCalories += 250;
 

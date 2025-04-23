@@ -6,7 +6,7 @@ import connectMongoDB from "../../../config/mongodb";
 
 
 export const POST = async (request:Request) => {
-  const {username, email, password} = await request.json();
+  const {username, email, password, calories, protein, fat, carbs} = await request.json();
 
   console.log(username, email, password);
 
@@ -15,7 +15,11 @@ export const POST = async (request:Request) => {
   const newUser = {
     username,
     password: hashedPassword,
-    email
+    email,
+    calories,
+    protein,
+    fat,
+    carbs
   }
   try {
     await User.create(newUser);

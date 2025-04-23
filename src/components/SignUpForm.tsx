@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
+import { doCredentialLogin } from "@/app/actions";
 import Link from "next/link";
 
 const SignupForm = () => {
@@ -17,6 +18,11 @@ const SignupForm = () => {
       const email = formData.get("email") as string | null;
       const password = formData.get("password") as string | null;
 
+      const calories = 0;
+      const protein = 0;
+      const fat = 0;
+      const carbs = 0;
+
       if (!username || !email || !password) {
         throw new Error("All fields are required.");
       }
@@ -30,10 +36,19 @@ const SignupForm = () => {
           username,
           email,
           password,
+          calories,
+          protein,
+          fat,
+          carbs,
         }),
       });
 
       if (response.status === 201) {
+        const response = await doCredentialLogin(formData);
+        if (response?.error) {
+          console.error(response.error);
+        }
+
         router.push("NewUserData");
       } else {
         console.log(`Failed to register: ${response.statusText}`);

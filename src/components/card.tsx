@@ -14,11 +14,10 @@ interface CardProps {
     protein: number;
     carbs: number;
     fats: number;
-    imageUrl: string;
     remove(card_id: string): void;
   }
   
-  const Card: React.FC<CardProps> = ({_id, name, calories, protein, carbs, fats, imageUrl, remove}: CardProps) => {
+  const Card: React.FC<CardProps> = ({_id, name, calories, protein, carbs, fats, remove}: CardProps) => {
     const removeItem = async () => {
       try {
         const response = await fetch(`/api/items/${_id}`, {
@@ -44,13 +43,6 @@ interface CardProps {
             </ul>
         </div>
         <div className="ml-4">
-          <Image
-            src={imageUrl}
-            alt={`${name} image`}
-            width={128}
-            height={128}
-            className="rounded-lg object-cover"
-          />
         </div>
         <div className="flex items-start h-full w-1/8">
           <button onClick={removeItem} className="hover:bg-[#000000] h-full w-full rounded-e-lg text-[20px] transition-all hover:text-white duration-200 ease-in-out">X</button>

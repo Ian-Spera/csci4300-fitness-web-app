@@ -9,9 +9,10 @@ import getMacros from "@/app/utils/getMacrosAPI";
 type ItemHandler = {
     items: {}[],
     setItems(list:{}[]): (e: React.Dispatch<React.SetStateAction<{}[]>>) => void,
+    setValues(obj:{calories: number, protein: number, fat: number, carbs: number}): (e: React.Dispatch<React.SetStateAction<{calories: number, protein: number, fat: number, carbs: number}>>) => void,
 }
 
-export default function AddItemDropDown({items, setItems}: ItemHandler) {
+export default function AddItemDropDown({items, setItems, setValues}: ItemHandler) {
     const [formData, setFormData] = useState({name: '', servingsize: 0});
     const [active, setActive] = useState(false);
 
@@ -49,6 +50,20 @@ export default function AddItemDropDown({items, setItems}: ItemHandler) {
             const data = await items.json();
             setItems(data.items);
 
+            var calorieTotal = 0;
+            var proteinTotal = 0;
+            var fatTotal = 0;
+            var carbsTotal = 0;
+        
+            for (var item in data.items) {
+                calorieTotal += data.items[item].calories;
+                proteinTotal += data.items[item].protein;
+                fatTotal += data.items[item].fats;
+                carbsTotal += data.items[item].carbs;
+            }
+
+            setValues({calories: parseFloat((calorieTotal / (user_data.user.calories) * 100).toFixed(1)), protein: parseFloat((proteinTotal / (user_data.user.protein) * 100).toFixed(1)), fat: parseFloat((fatTotal / (user_data.user.fat) * 100).toFixed(1)), carbs: parseFloat((carbsTotal / (user_data.user.carbs) * 100).toFixed(1))});
+
             if (!response.ok)
                 throw new Error('Response was not ok.');
         } catch (error) {
@@ -66,6 +81,20 @@ export default function AddItemDropDown({items, setItems}: ItemHandler) {
         const items = await fetch(`/api/items/byUser/${id}`);
         const data = await items.json();
         setItems(data.items);
+
+        var calorieTotal = 0;
+        var proteinTotal = 0;
+        var fatTotal = 0;
+        var carbsTotal = 0;
+        
+        for (var item in data.items) {
+            calorieTotal += data.items[item].calories;
+            proteinTotal += data.items[item].protein;
+            fatTotal += data.items[item].fats;
+            carbsTotal += data.items[item].carbs;
+        }
+
+        setValues({calories: parseFloat((calorieTotal / (user_data.user.calories) * 100).toFixed(1)), protein: parseFloat((proteinTotal / (user_data.user.protein) * 100).toFixed(1)), fat: parseFloat((fatTotal / (user_data.user.fat) * 100).toFixed(1)), carbs: parseFloat((carbsTotal / (user_data.user.carbs) * 100).toFixed(1))});
     }
 
     return (
@@ -86,7 +115,6 @@ export default function AddItemDropDown({items, setItems}: ItemHandler) {
                 protein={item.protein}
                 carbs={item.carbs}
                 fats={item.fats}
-                imageUrl={item.imageUrl}
                 remove={handleDelete}
               />
             ))}

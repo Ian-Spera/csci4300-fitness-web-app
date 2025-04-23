@@ -4,10 +4,10 @@ import User from "@/models/userSchema";
 import { mongo } from "mongoose";
 
 
-export const POST = async (request:Request) => {
-    const {userId, calories, protein, fat, carbs} = await request.json();
+export const PUT = async (request:Request) => {
+    const {userID: userId, calories: calories, protein: protein, fat: fat, carbs: carbs} = await request.json();
 
-    console.log(calories, protein, fat, carbs);
+    console.log(userId, calories, protein, fat, carbs);
 
     await connectMongoDB();
 
@@ -28,5 +28,5 @@ export const POST = async (request:Request) => {
         return new NextResponse("User not found", {status : 404});
     }
 
-    return new NextResponse("User macros updated", {status : 404});
+    return new NextResponse("User macros updated", {status : 200});
 };
